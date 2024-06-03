@@ -27,4 +27,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: yourdockerhubusername/my-docker-project:latest
+          tags: lampofsocrates/nlp-docker-2024:latest
