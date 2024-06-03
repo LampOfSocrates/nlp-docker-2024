@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "nlp-docker-2024"
+version = "0.1.0"
+description = "Docker image with Python 3.11.5 and NLP libraries"
+authors = ["Lamp Socrates <lampofsocrates@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.11.5"
+torch = "*"
+lightning = "*"
+transformers = "*"
+nltk = "*"
+spacy = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
