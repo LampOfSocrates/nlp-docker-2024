@@ -25,15 +25,6 @@ RUN poetry install --no-root --no-dev --no-interaction --no-ansi \
     && poetry cache clear --all pypi \
     && rm -rf /root/.cache/pypoetry
 
-# Download NLTK data
-RUN poetry run python -m nltk.downloader punkt wordnet
-
-# Download GloVe embeddings
-RUN mkdir -p /opt/glove && \
-    cd /opt/glove && \
-    wget http://nlp.stanford.edu/data/glove.6B.zip && \
-    unzip glove.6B.zip && \
-    rm glove.6B.zip
 
 # Expose the default port
 EXPOSE 8888

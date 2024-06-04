@@ -1,16 +1,12 @@
-# Use the base image
-FROM pytorchignite/nlp:latest
+# Use a smaller base image
+FROM python:3.10.14-slim as base
 
-# Install Python 3.11 and Poetry
-RUN apt-get update && apt-get install -y \
-    python3.11 \
-    python3.11-venv \
-    python3.11-dev \
+# Install dependencies and clean up
+RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
+    build-essential \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
 
 # Install Poetry
 RUN wget https://install.python-poetry.org -O - | python3 -
@@ -18,29 +14,20 @@ RUN wget https://install.python-poetry.org -O - | python3 -
 # Add Poetry to PATH
 ENV PATH="/root/.local/bin:$PATH"
 
-# Copy project files
-COPY pyproject.toml poetry.lock* /workspace/
-
+# Create working directory
 WORKDIR /workspace
+
+# Copy project files
+COPY pyproject.toml poetry.lock* ./
 
 # Install project dependencies
-RUN poetry install --no-root
+RUN poetry install --no-root --no-dev --no-interaction --no-ansi \
+    && poetry cache clear --all pypi \
+    && rm -rf /root/.cache/pypoetry
 
-# Download NLTK data
-RUN poetry run python3 -m nltk.downloader punkt wordnet
-
-# Download GloVe embeddings
-RUN mkdir -p /opt/glove && \
-    cd /opt/glove && \
-    wget http://nlp.stanford.edu/data/glove.6B.zip && \
-    unzip glove.6B.zip && \
-    rm glove.6B.zip
-
-# Set the working directory
-WORKDIR /workspace
 
 # Expose the default port
 EXPOSE 8888
 
 # Default command
-CMD ["poetry", "run", "python3"]
+CMD ["poetry", "run", "python"]
