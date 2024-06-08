@@ -7,7 +7,8 @@ pyproject.toml controls the versions of python and various compatible libraries
 Github Actions will build the docker image and deploy to Docker Hub 
 
 We should be able to run this 
+
 <code>
-docker pull yourdockerhubusername/my-docker-project:latest
-docker run -it yourdockerhubusername/my-docker-project:latest
+docker pull lampofsocrates/nlp-slim-2024:latest
+docker run -it lampofsocrates/nlp-slim-2024:latest
 </code>
