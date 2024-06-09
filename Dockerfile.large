@@ -2,11 +2,12 @@
 FROM pytorchignite/nlp:latest
 
 # Install Python 3.11 and Poetry
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends\
     python3.11 \
     python3.11-venv \
     python3.11-dev \
     wget \
+    build-essential \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -18,16 +19,20 @@ RUN wget https://install.python-poetry.org -O - | python3 -
 # Add Poetry to PATH
 ENV PATH="/root/.local/bin:$PATH"
 
+
+WORKDIR /workspace
 # Copy project files
 COPY pyproject.toml poetry.lock* /workspace/
 
-WORKDIR /workspace
-
 # Install project dependencies
-RUN poetry install --no-root
+#RUN poetry install --no-root
+RUN poetry install --no-root --no-dev --no-interaction --no-ansi \
+    && poetry cache clear --all pypi \
+    && rm -rf /root/.cache/pypoetry
+
 
 # Download NLTK data
-RUN poetry run python3 -m nltk.downloader punkt wordnet
+#RUN poetry run python3 -m nltk.downloader punkt wordnet
 
 # Download GloVe embeddings
 # RUN mkdir -p /opt/glove && \
@@ -36,8 +41,6 @@ RUN poetry run python3 -m nltk.downloader punkt wordnet
 #     unzip glove.6B.zip && \
 #     rm glove.6B.zip
 
-# Set the working directory
-WORKDIR /workspace
 
 # Expose the default port
 EXPOSE 8888

@@ -1,5 +1,5 @@
 # Use a smaller base image
-FROM python:3.10.14-slim as base
+FROM python:3.11.1-slim as base
 
 # Install dependencies and clean up
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -14,9 +14,8 @@ RUN wget https://install.python-poetry.org -O - | python3 -
 # Add Poetry to PATH
 ENV PATH="/root/.local/bin:$PATH"
 
-# Create working directory
-WORKDIR /workspace
 
+WORKDIR /workspace
 # Copy project files
 COPY pyproject.toml poetry.lock* ./
 

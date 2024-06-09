@@ -6,14 +6,15 @@ authors = ["Lamp Socrates <lampofsocrates@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.10.14"
+python = "3.11.1"
+pandas = "2.1.4"
 torch = "2.2.1"
 lightning = "2.2.5"
 transformers = "4.39.3"
 sentence-transformers = "3.0.0"
 nltk = "3.8.1"
 spacy = "3.7.4"
-pandas = "2.1.4"
+
 
 [build-system]
 requires = ["poetry-core"]
