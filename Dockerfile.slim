@@ -3,8 +3,12 @@ FROM pytorch/pytorch:2.2.1-cuda12.1-cudnn8-devel
 
 # Install dependencies and clean up
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.11 \
+    python3.11-venv \
+    python3.11-dev \
     wget \
     build-essential \
+    curl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -17,7 +21,7 @@ ENV PATH="/root/.local/bin:$PATH"
 
 WORKDIR /workspace
 # Copy project files
-COPY pyproject.toml poetry.lock*  /workspace/
+COPY pyproject.toml poetry.lock* /workspace/
 
 # Install project dependencies
 RUN poetry install --no-root --no-dev --no-interaction --no-ansi \
