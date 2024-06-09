@@ -40,10 +40,3 @@ RUN poetry install --no-root --no-dev --no-interaction --no-ansi \
 #     wget http://nlp.stanford.edu/data/glove.6B.zip && \
 #     unzip glove.6B.zip && \
 #     rm glove.6B.zip
-
-
-# Expose the default port
-EXPOSE 8888
-
-# Default command
-CMD ["poetry", "run", "python3"]

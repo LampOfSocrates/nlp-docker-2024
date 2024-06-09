@@ -25,8 +25,4 @@ RUN poetry install --no-root --no-dev --no-interaction --no-ansi \
     && rm -rf /root/.cache/pypoetry
 
 
-# Expose the default port
-EXPOSE 8888
 
-# Default command
-CMD ["poetry", "run", "python"]
