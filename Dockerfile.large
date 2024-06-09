@@ -1,5 +1,5 @@
 # Use the base image
-FROM pytorchignite/nlp:latest
+FROM pytorch/pytorch:2.2.1-cuda12.1-cudnn8-devel
 
 # Install Python 3.11 and Poetry
 RUN apt-get update && apt-get install -y --no-install-recommends\

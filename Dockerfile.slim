@@ -1,5 +1,5 @@
 # Use a smaller base image
-FROM pytorch/pytorch:latest
+FROM pytorch/pytorch:2.2.1-cuda12.1-cudnn8-devel
 
 # Install dependencies and clean up
 RUN apt-get update && apt-get install -y --no-install-recommends \
