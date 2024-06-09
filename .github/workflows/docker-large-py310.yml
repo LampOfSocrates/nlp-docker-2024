@@ -42,6 +42,6 @@ jobs:
           context: .
           file: Dockerfile.large
           push: true
-          tags: lampofsocrates/nlp-large-2024:latest
+          tags: lampofsocrates/nlp-large1-2024:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
