@@ -1,5 +1,5 @@
 # Use a smaller base image
-FROM python:3.11.1-slim as base
+FROM pytorch/pytorch:latest
 
 # Install dependencies and clean up
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -17,7 +17,7 @@ ENV PATH="/root/.local/bin:$PATH"
 
 WORKDIR /workspace
 # Copy project files
-COPY pyproject.toml poetry.lock* ./
+COPY pyproject.toml poetry.lock*  /workspace/
 
 # Install project dependencies
 RUN poetry install --no-root --no-dev --no-interaction --no-ansi \
